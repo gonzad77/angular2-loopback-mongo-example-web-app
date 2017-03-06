@@ -1,0 +1,50 @@
+<div class="conteiner">
+  <form [formGroup]="personForm" class="form" (ngSubmit)="onSubmit(personForm.value)" >
+
+   <div class="form-group input-group">
+     <label class="form-label" >Name</label>
+     <input class="form-control form-input" type="text" formControlName="name">
+   </div>
+   <div *ngIf="formErrors.name">
+     <div *ngFor="let errors of formErrors.name" >
+       <p class="alert">{{ errors }}<p>
+     </div>
+   </div>
+
+   <div class="form-group input-group">
+     <label class="form-label" >Last Name</label>
+     <input class="form-control form-input" type="text" formControlName="lastname">
+   </div>
+   <div *ngIf="formErrors.lastname">
+     <div *ngFor="let errors of formErrors.lastname" >
+       <p class="alert">{{ errors }}<p>
+     </div>
+   </div>
+
+   <div class="form-group input-group">
+     <label class="form-label" >Age</label>
+     <input class="form-control form-input" type="number" formControlName="age">
+   </div>
+   <div *ngIf="formErrors.age">
+     <div *ngFor="let errors of formErrors.age" >
+       <p class="alert">{{ errors }}<p>
+     </div>
+   </div>
+
+   <div class="form-group term">
+     <label class="terms-checkbox-label">Be able to adopt a pet</label>
+     <input type="checkbox" formControlName="able">
+   </div>
+
+
+  <div class="row">
+    <div class="col-md-6" width-50>
+     <button class="btn btn-primary" type="submit" [disabled]="!personForm.valid">Update</button>
+    </div>
+    <div class="col-md-6" width-50>
+      <button class="btn btn-primary" type="button"(click)="cancel()">Cancel</button>
+    </div>
+  </div>
+
+ </form>
+</div>

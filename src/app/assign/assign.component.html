@@ -1,0 +1,28 @@
+<div class="panel panel-default">
+  <!-- Default panel contents -->
+  <div class="panel-heading">
+    <label>All pets enable </label>
+  </div>
+
+  <!-- Table -->
+  <table class="table">
+    <thead>
+      <tr>
+        <th>Animal</th>
+        <th>Name</th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let pet of pets">
+        <th>{{pet.animal}}</th>
+        <th>{{pet.name}}</th>
+        <th>
+          <button type="button" class="btn btn-default" aria-label="Left Align" (click)="assign(pet.id)">
+            <span class="glyphicon glyphicon-cog" aria-hidden="true"></span>
+          </button>
+        </th>
+      </tr>
+    </tbody>
+  </table>
+</div>

@@ -1,0 +1,76 @@
+import { Component, OnInit } from '@angular/core';
+import { Validators, FormGroup, FormControl} from '@angular/forms';
+import { Router } from '@angular/router';
+import {PersonService} from '../services/person.service';
+
+@Component({
+  selector: 'createPerson',
+  styleUrls: ['./createPerson.scss'],
+  templateUrl: './createPerson.component.html'
+})
+
+export class CreatePersonComponent implements OnInit{
+
+  personForm: FormGroup;
+  formErrors = {
+    'name': [],
+    'lastname': [],
+    'age': []
+  };
+  validationMessages = {
+    'name': {
+      'required':      'Name is required.'
+    },
+    'lastname': {
+      'required':      'Last name is required'
+    },
+    'age': {
+      'required':      'Age is required'
+    },
+  };
+
+  constructor(
+    private personService: PersonService,
+    private router: Router
+  ){}
+
+  ngOnInit(): void {
+    console.log('Start OK')
+    this.personForm = new FormGroup({
+      name: new FormControl('', Validators.required),
+      lastname: new FormControl('', Validators.required),
+      age: new FormControl('', Validators.required),
+      able: new FormControl(false, Validators.required)
+    });
+    this.subcribeToFormChanges();
+  }
+
+  subcribeToFormChanges(){
+    const myFormValueChanges$ = this.personForm.valueChanges;
+    myFormValueChanges$.subscribe(x =>{
+      if (!this.personForm) { return; }
+        const form = this.personForm;
+        for (const field in this.formErrors) {
+          // clear previous error message
+          this.formErrors[field] = [];
+          this.personForm[field] = '';
+          const control = form.get(field);
+          if (control && control.dirty && !control.valid) {
+            const messages = this.validationMessages[field];
+            for (const key in control.errors) {
+              this.formErrors[field].push(messages[key]);
+            }
+          }
+        }
+    })
+  }
+
+  cancel(){
+    this.router.navigate(['/person']);
+  }
+
+  onSubmit(values){
+    this.personService.createPerson(values)
+    .then(res => this.router.navigate(['/person']))
+  }
+}

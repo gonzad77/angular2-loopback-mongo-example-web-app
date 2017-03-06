@@ -1,0 +1,37 @@
+<div class="panel panel-default">
+  <!-- Default panel contents -->
+  <div class="panel-heading">
+    <label>All pets</label>
+    <button type="button" class="btn btn-default btn-create" aria-label="Left Align" (click)="create()">
+      <span class="glyphicon glyphicon-cog" aria-hidden="true"></span>
+    </button>
+  </div>
+
+  <!-- Table -->
+  <table class="table">
+    <thead>
+      <tr>
+        <th>Animal</th>
+        <th>Name</th>
+        <th></th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let pet of pets">
+        <th>{{pet.animal}}</th>
+        <th>{{pet.name}}</th>
+        <th>
+          <button type="button" class="btn btn-default" aria-label="Left Align" (click)="update(pet)">
+            <span class="glyphicon glyphicon-cog" aria-hidden="true"></span>
+          </button>
+        </th>
+        <th>
+          <button type="button" class="btn btn-default" aria-label="Left Align" (click)="delete(pet.id)">
+            <span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
+          </button>
+        </th>
+      </tr>
+    </tbody>
+  </table>
+</div>
