@@ -2,13 +2,14 @@
   <!-- Default panel contents -->
   <div class="panel-heading">
     <label>All pets</label>
-    <button type="button" class="btn btn-default btn-create" aria-label="Left Align" (click)="create()">
-      <span class="glyphicon glyphicon-cog" aria-hidden="true"></span>
-    </button>
+    <a class="btn-create" aria-label="Left Align" (click)="modalCreate.show()">
+      <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+    </a>
+    <create-pet-modal #modalCreate="childPetCreate"></create-pet-modal>
   </div>
 
   <!-- Table -->
-  <table class="table">
+  <table [ngBusy]="{busy: busy, message: 'Loading...'}" class="table">
     <thead>
       <tr>
         <th>Animal</th>
@@ -22,14 +23,15 @@
         <th>{{pet.animal}}</th>
         <th>{{pet.name}}</th>
         <th>
-          <button type="button" class="btn btn-default" aria-label="Left Align" (click)="update(pet)">
+          <a (click)="modalUpdate.show()">
             <span class="glyphicon glyphicon-cog" aria-hidden="true"></span>
-          </button>
+          </a>
+          <update-pet-modal [pet]='pet' #modalUpdate="childPetUpdate"></update-pet-modal>
         </th>
         <th>
-          <button type="button" class="btn btn-default" aria-label="Left Align" (click)="delete(pet.id)">
+          <a (click)="delete(pet.id)">
             <span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
-          </button>
+          </a>
         </th>
       </tr>
     </tbody>

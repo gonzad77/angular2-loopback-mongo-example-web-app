@@ -11,6 +11,7 @@ import {PetService} from '../services/pet.service'
 export class PetComponent {
 
   pets: Array<any> = [];
+  busy: Promise<any>;
 
   constructor(
     private petService: PetService,
@@ -22,12 +23,8 @@ export class PetComponent {
   }
 
   getPets(){
-    this.petService.getPets()
+    this.busy = this.petService.getPets()
     .then(res => this.pets = res.json())
-  }
-
-  create(){
-    this.router.navigate(['/createPet']);
   }
 
   update(pet){

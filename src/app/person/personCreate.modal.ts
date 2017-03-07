@@ -1,16 +1,19 @@
-import { Component, OnInit } from '@angular/core';
-import { Validators, FormGroup, FormControl} from '@angular/forms';
+import {Component, ViewChild, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import {PersonService} from '../services/person.service';
+import { Validators, FormGroup, FormControl} from '@angular/forms';
+import { Observable } from 'rxjs/Observable';
+import 'rxjs/add/operator/map';
+import {PersonService} from '../services/person.service'
 
 @Component({
-  selector: 'createPerson',
-  styleUrls: ['./createPerson.scss'],
-  templateUrl: './createPerson.component.html'
+    selector: 'create-modal',
+    templateUrl: './personCreate.modal.html',
+    exportAs: 'childCreate',
+    styleUrls: ['./person.scss']
 })
 
-export class CreatePersonComponent implements OnInit{
-
+export class PersonCreateModal implements OnInit{
+  @ViewChild('createModal') createModal;
   personForm: FormGroup;
   formErrors = {
     'name': [],
@@ -32,10 +35,9 @@ export class CreatePersonComponent implements OnInit{
   constructor(
     private personService: PersonService,
     private router: Router
-  ){}
+  ) {}
 
   ngOnInit(): void {
-    console.log('Start OK')
     this.personForm = new FormGroup({
       name: new FormControl('', Validators.required),
       lastname: new FormControl('', Validators.required),
@@ -66,11 +68,17 @@ export class CreatePersonComponent implements OnInit{
   }
 
   cancel(){
-    this.router.navigate(['/person']);
+    this.createModal.hide();
   }
 
   onSubmit(values){
     this.personService.createPerson(values)
-    .then(res => this.router.navigate(['/person']))
+    .then(res => {
+      this.createModal.hide()
+      })
+  }
+
+  show(){
+    this.createModal.show();
   }
 }

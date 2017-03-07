@@ -1,16 +1,21 @@
-import { Component, OnInit } from '@angular/core';
-import { Validators, FormGroup, FormControl} from '@angular/forms';
+import {Component, ViewChild, Input, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { PetService } from '../services/pet.service';
+import { Validators, FormGroup, FormControl} from '@angular/forms';
+import { Observable } from 'rxjs/Observable';
+import 'rxjs/add/operator/map';
+import {PetService} from '../services/pet.service'
 
 @Component({
-  selector: 'createPet',
-  styleUrls: ['./createPet.scss'],
-  templateUrl: './createPet.component.html'
+    selector: 'update-pet-modal',
+    templateUrl: './petUpdate.modal.html',
+    exportAs: 'childPetUpdate',
+    styleUrls: ['./pet.scss']
 })
 
-export class CreatePetComponent {
+export class PetUpdateModal implements OnInit{
 
+  @ViewChild('updateModal') updateModal;
+  @Input() pet: any;
   petForm: FormGroup;
   formErrors = {
     'name': [],
@@ -32,8 +37,8 @@ export class CreatePetComponent {
 
   ngOnInit(): void {
     this.petForm = new FormGroup({
-      name: new FormControl('', Validators.required),
-      animal: new FormControl('', Validators.required)
+      name: new FormControl(this.pet.name, Validators.required),
+      animal: new FormControl(this.pet.animal, Validators.required)
     });
     this.subcribeToFormChanges();
   }
@@ -59,11 +64,19 @@ export class CreatePetComponent {
   }
 
   cancel(){
-    this.router.navigate(['/pet']);
+    this.updateModal.hide();
   }
 
   onSubmit(values){
-    this.petService.createPet(values)
-    .then(res => this.router.navigate(['/pet']))
+    let petId = this.pet.id;
+    this.petService.updatePet(petId,values)
+    .then(res => {
+      this.updateModal.hide()
+
+      })
+  }
+
+  show(){
+    this.updateModal.show();
   }
 }

@@ -1,19 +1,20 @@
-import {Component, OnInit, Input} from '@angular/core';
+import {Component, ViewChild, Input, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Validators, FormGroup, FormControl} from '@angular/forms';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/map';
-
 import {PersonService} from '../services/person.service'
 
 @Component({
-  selector: 'updatePerson',
-  styleUrls: ['./updatePerson.scss'],
-  templateUrl: './updatePerson.component.html'
+    selector: 'update-modal',
+    templateUrl: './personUpdate.modal.html',
+    exportAs: 'childUpdate',
+    styleUrls: ['./person.scss']
 })
 
-export class UpdatePersonComponent implements OnInit{
-  @Input() person: any;
+export class PersonUpdateModal implements OnInit{
+  @Input() person;
+  @ViewChild('updateModal') updateModal;
   personForm: FormGroup;
   formErrors = {
     'name': [],
@@ -35,7 +36,7 @@ export class UpdatePersonComponent implements OnInit{
   constructor(
     private personService: PersonService,
     private router: Router
-  ){}
+  ) {}
 
   ngOnInit(): void {
     this.personForm = new FormGroup({
@@ -68,12 +69,19 @@ export class UpdatePersonComponent implements OnInit{
   }
 
   cancel(){
-    this.router.navigate(['/person']);
+    this.updateModal.hide();
   }
 
   onSubmit(values){
     let personId = this.person.id;
     this.personService.updatePerson(personId,values)
-    .then(res => this.router.navigate(['/person']))
+    .then(res => {
+      this.updateModal.hide()
+
+      })
+  }
+
+  show(){
+    this.updateModal.show();
   }
 }

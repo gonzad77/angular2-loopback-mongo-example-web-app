@@ -1,6 +1,8 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnInit, ViewContainerRef, ViewChild} from '@angular/core';
 import { Router } from '@angular/router';
-import {PersonService} from '../services/person.service'
+import {PersonService} from '../services/person.service';
+// import { PersonUpdateModal } from './personUpdate.modal';
+import { ModalDirective } from 'ng2-bootstrap/modal';
 
 @Component({
   selector: 'person',
@@ -10,11 +12,15 @@ import {PersonService} from '../services/person.service'
 
 export class PersonComponent implements OnInit{
 
+  // @ViewChild('lgModal') lgModal : ModalDirective;
+
   people: Array<any> = [];
+  busy: Promise<any>;
 
   constructor(
     private personService: PersonService,
-    private router: Router
+    private router: Router,
+    private viewContainerRef:ViewContainerRef
   ){}
 
   ngOnInit(): void {
@@ -22,7 +28,7 @@ export class PersonComponent implements OnInit{
   }
 
   getPeople(){
-    this.personService.getPeople()
+    this.busy = this.personService.getPeople()
     .then(res => this.people = res.json())
   }
 
@@ -30,12 +36,9 @@ export class PersonComponent implements OnInit{
     this.router.navigate(['/createPerson']);
   }
 
-  update(person){
-    this.router.navigate(['/updatePerson'])
-  }
-
   delete(personId){
     this.personService.deletePerson(personId)
-    .then(res => this.getPeople())
-  }
+    .then(res => this.getPeople());
+  };
+
 }

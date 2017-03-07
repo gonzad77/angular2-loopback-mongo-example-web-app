@@ -2,13 +2,14 @@
   <!-- Default panel contents -->
   <div class="panel-heading">
     <label>All people</label>
-    <button type="button" class="btn btn-default btn-create" aria-label="Left Align" (click)="create()">
-      <span class="glyphicon glyphicon-cog" aria-hidden="true"></span>
-    </button>
+    <a class="btn-create" aria-label="Left Align" (click)="modalCreate.show()">
+      <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+    </a>
+    <create-modal #modalCreate="childCreate"></create-modal>
   </div>
 
   <!-- Table -->
-  <table class="table">
+  <table [ngBusy]="{busy: busy, message: 'Loading...'}" class="table">
     <thead>
       <tr>
         <th>Name</th>
@@ -22,14 +23,15 @@
         <th>{{person.name}}</th>
         <th>{{person.surname}}</th>
         <th>
-          <button type="button" class="btn btn-default" aria-label="Left Align" (click)="update(person)">
+          <a (click)='modalUpdate.show()'>
             <span class="glyphicon glyphicon-cog" aria-hidden="true"></span>
-          </button>
+          </a>
+          <update-modal [person]='person' #modalUpdate="childUpdate"></update-modal>
         </th>
         <th>
-          <button type="button" class="btn btn-default" aria-label="Left Align" (click)="delete(person.id)">
+          <a (click)="delete(person.id)">
             <span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
-          </button>
+          </a>
         </th>
       </tr>
     </tbody>
