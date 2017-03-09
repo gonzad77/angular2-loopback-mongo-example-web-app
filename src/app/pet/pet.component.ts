@@ -1,6 +1,7 @@
-import {Component} from '@angular/core';
+import {Component, OnInit, ViewContainerRef} from '@angular/core';
 import { Router } from '@angular/router';
 import {PetService} from '../services/pet.service'
+import { ToastsManager, Toast } from 'ng2-toastr/ng2-toastr';
 
 @Component({
   selector: 'pet',
@@ -15,8 +16,12 @@ export class PetComponent {
 
   constructor(
     private petService: PetService,
-    private router: Router
-  ){}
+    private router: Router,
+    public toaster: ToastsManager,
+    private viewContainerRef:ViewContainerRef
+  ){
+    this.toaster.setRootViewContainerRef(viewContainerRef);
+  }
 
   ngOnInit(): void {
     this.getPets();
@@ -34,5 +39,15 @@ export class PetComponent {
   delete(petId){
     this.petService.deletePet(petId)
     .then(res => this.getPets())
+  }
+
+  onHidden(data:any){
+    this.getPets();
+    debugger;
+    this.toaster.success(data.message, 'Success!',
+    {
+      dismiss: 'auto',
+      toastLife: 3000
+    })
   }
 }

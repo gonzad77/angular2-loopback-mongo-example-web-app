@@ -1,4 +1,4 @@
-import {Component, ViewChild, Input, OnInit } from '@angular/core';
+import {Component, ViewChild, Input, Output, EventEmitter, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Validators, FormGroup, FormControl} from '@angular/forms';
 import { Observable } from 'rxjs/Observable';
@@ -16,6 +16,7 @@ export class PetUpdateModal implements OnInit{
 
   @ViewChild('updateModal') updateModal;
   @Input() pet: any;
+  @Output() onClose = new EventEmitter<any>();
   petForm: FormGroup;
   formErrors = {
     'name': [],
@@ -71,12 +72,14 @@ export class PetUpdateModal implements OnInit{
     let petId = this.pet.id;
     this.petService.updatePet(petId,values)
     .then(res => {
-      this.updateModal.hide()
-
+      this.onClose.emit({message: 'Pet was updated'});
+      this.updateModal.hide();
       })
   }
 
   show(){
     this.updateModal.show();
   }
+
+
 }

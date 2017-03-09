@@ -1,4 +1,4 @@
-import {Component, ViewChild, OnInit } from '@angular/core';
+import {Component, ViewChild, OnInit, Output, EventEmitter } from '@angular/core';
 import { Router } from '@angular/router';
 import { Validators, FormGroup, FormControl} from '@angular/forms';
 import { Observable } from 'rxjs/Observable';
@@ -14,6 +14,7 @@ import {PersonService} from '../services/person.service'
 
 export class PersonCreateModal implements OnInit{
   @ViewChild('createModal') createModal;
+  @Output() onClose = new EventEmitter<any>();
   personForm: FormGroup;
   formErrors = {
     'name': [],
@@ -74,6 +75,7 @@ export class PersonCreateModal implements OnInit{
   onSubmit(values){
     this.personService.createPerson(values)
     .then(res => {
+      this.onClose.emit({message: "A person was created"});
       this.createModal.hide()
       })
   }
@@ -81,4 +83,5 @@ export class PersonCreateModal implements OnInit{
   show(){
     this.createModal.show();
   }
+
 }

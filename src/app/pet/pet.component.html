@@ -5,7 +5,7 @@
     <a class="btn-create" aria-label="Left Align" (click)="modalCreate.show()">
       <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
     </a>
-    <create-pet-modal #modalCreate="childPetCreate"></create-pet-modal>
+    <create-pet-modal #modalCreate="childPetCreate" (onClose)="onHidden($event)"></create-pet-modal>
   </div>
 
   <!-- Table -->
@@ -26,7 +26,7 @@
           <a (click)="modalUpdate.show()">
             <span class="glyphicon glyphicon-cog" aria-hidden="true"></span>
           </a>
-          <update-pet-modal [pet]='pet' #modalUpdate="childPetUpdate"></update-pet-modal>
+          <update-pet-modal [pet]='pet' #modalUpdate="childPetUpdate" (onClose)="onHidden($event)"></update-pet-modal>
         </th>
         <th>
           <a (click)="delete(pet.id)">

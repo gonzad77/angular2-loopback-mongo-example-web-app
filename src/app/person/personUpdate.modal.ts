@@ -1,4 +1,4 @@
-import {Component, ViewChild, Input, OnInit } from '@angular/core';
+import {Component, ViewChild, Input, Output, EventEmitter, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Validators, FormGroup, FormControl} from '@angular/forms';
 import { Observable } from 'rxjs/Observable';
@@ -15,6 +15,7 @@ import {PersonService} from '../services/person.service'
 export class PersonUpdateModal implements OnInit{
   @Input() person;
   @ViewChild('updateModal') updateModal;
+  @Output() onClose = new EventEmitter<any>();
   personForm: FormGroup;
   formErrors = {
     'name': [],
@@ -76,8 +77,8 @@ export class PersonUpdateModal implements OnInit{
     let personId = this.person.id;
     this.personService.updatePerson(personId,values)
     .then(res => {
-      this.updateModal.hide()
-
+      this.onClose.emit({values});
+      this.updateModal.hide();
       })
   }
 
