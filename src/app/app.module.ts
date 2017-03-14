@@ -5,7 +5,6 @@ import { AppComponent } from './app.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
 import { HttpModule } from '@angular/http';
-
 import { PersonComponent } from './person/person.component';
 import { PetComponent } from './pet/pet.component';
 import { PersonService } from './services/person.service';
@@ -16,9 +15,7 @@ import { PetCreateModal  } from './pet/petCreate.modal';
 import { PetUpdateModal  } from './pet/petUpdate.modal';
 import { MyPetsModal  } from './person/myPets.modal';
 import { AdoptModal  } from './person/adopt.modal';
-
 import { LocationStrategy, HashLocationStrategy } from '@angular/common';
-
 import {BusyModule} from 'angular2-busy';
 import { ModalModule } from 'ng2-bootstrap/modal';
 import {ToastModule} from 'ng2-toastr/ng2-toastr';
@@ -51,6 +48,4 @@ import {ToastModule} from 'ng2-toastr/ng2-toastr';
   ],
   bootstrap: [ AppComponent ]
 })
-export class AppModule {
-
-}
+export class AppModule {}

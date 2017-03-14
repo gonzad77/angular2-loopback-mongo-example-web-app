@@ -51,7 +51,6 @@ export class PetService {
     .toPromise()
   }
 
-
   getNotAssignedPets(){
     return this.http
     .get(API_URL + 'Pets?filter={"where": {"or":[{"ownerId":{"exists": false}},{"ownerId":null}]}}')

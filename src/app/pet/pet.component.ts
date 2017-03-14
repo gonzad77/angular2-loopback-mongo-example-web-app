@@ -43,7 +43,6 @@ export class PetComponent {
 
   onHidden(data:any){
     this.getPets();
-    debugger;
     this.toaster.success(data.message, 'Success!',
     {
       dismiss: 'auto',
