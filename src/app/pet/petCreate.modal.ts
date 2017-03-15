@@ -70,7 +70,7 @@ export class PetCreateModal implements OnInit{
   onSubmit(values){
     this.petService.createPet(values)
     .then(res => {
-      this.onClose.emit({message: 'A per was created'});
+      this.onClose.emit({message: 'A pet was created'});
       this.createModal.hide()
       })
   }
