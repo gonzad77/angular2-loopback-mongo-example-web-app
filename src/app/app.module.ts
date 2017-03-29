@@ -40,7 +40,7 @@ import { SDKBrowserModule } from '../../sdk/index';
     FormsModule,
     ReactiveFormsModule,
     HttpModule,
-    RouterModule.forRoot(rootRouterConfig),
+    RouterModule.forRoot(rootRouterConfig, { useHash: true }),
     BusyModule,
     ModalModule.forRoot(),
     ToastModule.forRoot(),
