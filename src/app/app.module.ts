@@ -7,30 +7,33 @@ import { BrowserModule } from '@angular/platform-browser';
 import { HttpModule } from '@angular/http';
 import { PersonComponent } from './person/person.component';
 import { PetComponent } from './pet/pet.component';
+import { AuthComponent } from './auth/auth.component';
 import { PersonService } from './services/person.service';
 import { PetService } from './services/pet.service';
 import { PersonUpdateModal  } from './person/personUpdate.modal';
-import { PersonCreateModal  } from './person/personCreate.modal';
 import { PetCreateModal  } from './pet/petCreate.modal';
 import { PetUpdateModal  } from './pet/petUpdate.modal';
 import { MyPetsModal  } from './person/myPets.modal';
 import { AdoptModal  } from './person/adopt.modal';
+import { AuthSignupModal  } from './auth/authSignup.modal';
 import { LocationStrategy, HashLocationStrategy } from '@angular/common';
 import {BusyModule} from 'angular2-busy';
 import { ModalModule } from 'ng2-bootstrap/modal';
 import {ToastModule} from 'ng2-toastr/ng2-toastr';
+import { SDKBrowserModule } from '../../sdk/index';
 
 @NgModule({
   declarations: [
     AppComponent,
     PersonComponent,
     PetComponent,
+    AuthComponent,
     PersonUpdateModal,
-    PersonCreateModal,
     PetCreateModal,
     PetUpdateModal,
     MyPetsModal,
-    AdoptModal
+    AdoptModal,
+    AuthSignupModal
   ],
   imports: [
     BrowserModule,
@@ -40,7 +43,8 @@ import {ToastModule} from 'ng2-toastr/ng2-toastr';
     RouterModule.forRoot(rootRouterConfig, { useHash: true }),
     BusyModule,
     ModalModule.forRoot(),
-    ToastModule.forRoot()
+    ToastModule.forRoot(),
+    SDKBrowserModule.forRoot()
   ],
   providers: [
     PersonService,

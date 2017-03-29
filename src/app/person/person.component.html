@@ -1,11 +1,15 @@
+<ul class="nav nav-tabs nav-justified">
+	<li role="presentation"><a [routerLink]="['/person']">
+    Person
+  </a></li>
+	<li role="presentation"><a [routerLink]="['/pet']">
+    Pet
+  </a></li>
+</ul>
 <div class="panel panel-default">
   <!-- Default panel contents -->
   <div class="panel-heading">
     <label>All people</label>
-    <a class="btn-create" aria-label="Left Align" (click)="modalCreate.show()">
-      <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
-    </a>
-    <create-modal #modalCreate="childCreate" (onClose)="onHidden($event)"></create-modal>
   </div>
 
   <!-- Table -->

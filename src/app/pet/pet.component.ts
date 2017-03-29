@@ -29,7 +29,9 @@ export class PetComponent {
 
   getPets(){
     this.busy = this.petService.getPets()
-    .then(res => this.pets = res.json())
+    .then(res => {
+      this.pets = res;
+    })
   }
 
   update(pet){
@@ -38,7 +40,8 @@ export class PetComponent {
 
   delete(petId){
     this.petService.deletePet(petId)
-    .then(res => this.getPets())
+    .then(res => {
+      this.getPets()})
   }
 
   onHidden(data:any){

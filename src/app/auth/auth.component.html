@@ -1,0 +1,35 @@
+<div class="conteiner">
+  <form [formGroup]="loginForm" class="form" (ngSubmit)="onSubmit(loginForm.value)" >
+
+   <div class="form-group">
+     <label class="form-label" >Email</label>
+     <input class="form-control" type="email" formControlName="email">
+   </div>
+   <div *ngIf="formErrors.email">
+     <div *ngFor="let errors of formErrors.email" >
+       <p class="alert">{{ errors }}<p>
+     </div>
+   </div>
+
+   <div class="form-group">
+     <label class="form-label" >Password</label>
+     <input class="form-control" type="password" formControlName="password">
+   </div>
+   <div *ngIf="formErrors.password">
+     <div *ngFor="let errors of formErrors.password" >
+       <p class="alert">{{ errors }}<p>
+     </div>
+   </div>
+
+   <div class="row">
+    <div class="col-md-6" width-50>
+     <button class="btn btn-primary" type="submit" [disabled]="!loginForm.valid">Log In</button>
+    </div>
+    <div class="col-md-6" width-50>
+      <button class="btn btn-primary" type="button"(click)="modalSignup.show()">Sign Up</button>
+      <signup-modal  #modalSignup="childAuthSignup"></signup-modal>
+    </div>
+  </div>
+
+ </form>
+</div>

@@ -23,7 +23,7 @@ export class AdoptModal implements OnInit{
 
   ngOnInit(): void {
     this.petService.getNotAssignedPets()
-    .then(res => this.pets = res.json())
+    .then(res => this.pets = res)
   }
 
   show(){

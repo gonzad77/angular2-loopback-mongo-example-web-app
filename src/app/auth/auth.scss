@@ -1,0 +1,36 @@
+// @import "../styles/app.scss";
+.btn-create{
+  margin-left: 90%;
+}
+
+.term
+{
+  padding-top: 20px;
+}
+
+.terms-checkbox-label
+{
+  overflow: visible;
+  text-overflow: initial;
+  white-space: initial;
+  opacity: 0.5;
+  font-size: 14px;
+  font-weight: bold;
+}
+
+.alert
+{
+  color: red;
+  margin: 0px auto;
+  padding: 0px;
+}
+
+.form{
+  display: table;
+  margin: 0px auto;
+  margin-top: 10px;
+}
+
+.form-label{
+  color: #337ab7;
+}

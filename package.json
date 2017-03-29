@@ -5,7 +5,7 @@
   "scripts": {
     "build": "rimraf dist && webpack --progress",
     "watch": "npm run build -- --watch",
-    "server": "webpack-dev-server --inline --progress --port 3000 --content-base src",
+    "server": "webpack-dev-server --inline --progress --port 5000 --content-base src",
     "start-dev": "npm run server",
     "prestart": "npm run build",
     "start": "node src/server.js"
