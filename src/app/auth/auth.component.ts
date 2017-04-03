@@ -79,7 +79,6 @@ export class AuthComponent implements OnInit{
   onSubmit(values){
     this.personService.login(values)
     .then(res => {
-      console.log(res)
       this.router.navigate(['/person']);
       this.onClose.emit({message: "A person was logged"});
       })

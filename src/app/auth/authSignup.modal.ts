@@ -95,10 +95,10 @@ export class AuthSignupModal implements OnInit{
   onSubmit(values){
     this.personService.createPerson(values)
     .then(function(res) {
-      debugger;
       this.signupModal.hide();
     }, function(err){
       console.log(err)
+      this.signupModal.hide();
     });
   }
 

@@ -73,4 +73,9 @@ export class PersonService {
     return this.personApi.createAccessTokens(personId)
     .toPromise()
   }
+
+  logout(){
+    return this.personApi.logout()
+    .toPromise()
+  }
 }
