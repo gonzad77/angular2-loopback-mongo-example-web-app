@@ -1,6 +1,7 @@
 import {Component, OnInit, ViewContainerRef} from '@angular/core';
 import { Router } from '@angular/router';
 import {PersonService} from '../services/person.service';
+import {PetService} from '../services/pet.service';
 import { ModalDirective } from 'ng2-bootstrap/modal';
 import { ToastsManager, Toast } from 'ng2-toastr/ng2-toastr';
 
@@ -17,6 +18,7 @@ export class PersonComponent implements OnInit{
 
   constructor(
     private personService: PersonService,
+    private petService: PetService,
     private router: Router,
     public toaster: ToastsManager,
     private viewContainerRef:ViewContainerRef
@@ -33,9 +35,22 @@ export class PersonComponent implements OnInit{
     .then(res => this.people = res.json())
   }
 
+  updatePets(personId){
+    this.petService.getPetsByOwner(personId)
+    .then(res => {
+      let pets = res.json();
+      for (let pet of pets){
+        this.petService.setOwnerNull(pet.id)
+        .then(result => this.getPeople())
+      }
+    });
+  }
+
   delete(personId){
     this.personService.deletePerson(personId)
-    .then(res => this.getPeople());
+    .then(res => {
+      this.updatePets(personId);
+    });
   };
 
   onHidden(data: any) {
