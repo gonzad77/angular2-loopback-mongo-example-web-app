@@ -2,6 +2,7 @@ import './polyfills.browser';
 
 import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
 import { AppModule } from './app/app.module';
+import { LoopBackConfig } from '../sdk';
 
 export const platformRef = platformBrowserDynamic();
 
@@ -20,3 +21,5 @@ switch (document.readyState) {
   default:
     document.addEventListener('DOMContentLoaded', () => main());
 }
+
+LoopBackConfig.setBaseURL('https://ionic2-loopback-mongo-api.herokuapp.com');

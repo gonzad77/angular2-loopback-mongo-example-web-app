@@ -19,6 +19,7 @@ import { LocationStrategy, HashLocationStrategy } from '@angular/common';
 import {BusyModule} from 'angular2-busy';
 import { ModalModule } from 'ng2-bootstrap/modal';
 import {ToastModule} from 'ng2-toastr/ng2-toastr';
+import { SDKBrowserModule } from '../../sdk/index';
 
 @NgModule({
   declarations: [
@@ -40,7 +41,8 @@ import {ToastModule} from 'ng2-toastr/ng2-toastr';
     RouterModule.forRoot(rootRouterConfig, { useHash: true }),
     BusyModule,
     ModalModule.forRoot(),
-    ToastModule.forRoot()
+    ToastModule.forRoot(),
+    SDKBrowserModule.forRoot()
   ],
   providers: [
     PersonService,

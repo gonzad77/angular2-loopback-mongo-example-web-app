@@ -29,7 +29,7 @@ export class PetComponent {
 
   getPets(){
     this.busy = this.petService.getPets()
-    .then(res => this.pets = res.json())
+    .then(res => this.pets = res)
   }
 
   update(pet){

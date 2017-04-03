@@ -1,84 +1,82 @@
 import { Injectable } from '@angular/core';
 import { Http } from '@angular/http';
+import { PetApi, Pet } from '../../../sdk';
 import 'rxjs/add/operator/toPromise';
 const API_URL = "https://ionic2-loopback-mongo-api.herokuapp.com/api/";
 
 @Injectable()
 export class PetService {
 
-  constructor(public http: Http) {}
+  constructor(
+    public http: Http,
+    public petApi: PetApi
+  ) {}
 
   getPets(){
-    return this.http
-    .get(API_URL + 'Pets')
-    .toPromise()
+    return this.petApi.find<Pet>()
+    .toPromise();
   }
 
   getPet(petId){
-    return this.http
-    .get(API_URL + 'Pets/' + petId)
+    return this.petApi.findById<Pet>(petId)
     .toPromise()
   }
 
   getPetsByOwner(ownerId){
-    return this.http
-    .get(API_URL + 'Pets/?filter={"where":{"ownerId":"'+ ownerId + '"}}')
+    let query = {
+      ownerId: ownerId
+    }
+    return this.petApi.find<Pet>({where: query})
     .toPromise()
   }
 
   deletePet(petId){
-    return this.http
-    .delete(API_URL + 'Pets/' + petId)
+    return this.petApi.deleteById<Pet>(petId)
     .toPromise()
   }
 
   updatePet(petId, values){
-    return this.http
-    .put(API_URL + 'Pets/' + petId, {
-      name: values.name,
-      animal: values.animal
-      })
-    .toPromise()
+    let data = new Pet();
+    data.name= values.name;
+    data.animal= values.animal;
+    return this.petApi.updateAttributes<Pet>(petId, data)
+    .toPromise();
   }
 
   updatePets(personId){
-    let id = "" + personId + "";
-    return this.http
-    .post(API_URL + 'Pets/update?where[ownerId]=' + id,
-    {
-      ownerId: null
-    })
-    .toPromise()
-  }
+   let query = {ownerId: personId};
+   let data = new Pet();
+   data.ownerId = null;
+   return this.petApi.updateAll<Pet>({where: query}, data)
+   .toPromise()
+ }
 
-  getNotAssignedPets(){
-    return this.http
-    .get(API_URL + 'Pets?filter={"where": {"or":[{"ownerId":{"exists": false}},{"ownerId":null}]}}')
-    .toPromise()
-  }
+ getNotAssignedPets(){
+   let query = { or: [{ownerId: {exists: false}},{ownerId:null}]};
+   return this.petApi.find<Pet>({where: query})
+   .toPromise()
+ }
 
-  assignPet(petId, personId){
-    return this.http
-    .put(API_URL + 'Pets/' + petId,{
-      ownerId: personId
-    })
-    .toPromise()
-  }
+ assignPet(petId, personId){
+   let data = new Pet();
+   data.ownerId = personId
+   return this.petApi.updateAttributes<Pet>(petId, data)
+   .toPromise()
+ }
 
-  createPet(values){
-    return this.http
-    .post(API_URL + 'Pets', {
-      name: values.name,
-      animal: values.animal
-      })
-    .toPromise()
-  }
+ createPet(values){
+   let pet = new Pet({
+     name: values.name,
+     animal: values.animal
+   })
+   return this.petApi.create<Pet>(pet)
+   .toPromise()
+ }
 
-  setOwnerNull(petId){
-    return this.http
-    .put(API_URL + 'Pets/' + petId,{
-      ownerId: null
-    })
-    .toPromise()
-  }
+ setOwnerNull(petId){
+   let data = new Pet();
+   data.ownerId = null;
+   return this.petApi.updateAttributes<Pet>(petId, data)
+   .toPromise()
+ }
 }

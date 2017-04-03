@@ -1,56 +1,55 @@
 import { Injectable } from '@angular/core';
 import { Http } from '@angular/http';
+import { PersonApi, Person } from '../../../sdk';
 import 'rxjs/add/operator/toPromise';
 const API_URL = "https://ionic2-loopback-mongo-api.herokuapp.com/api/";
 
 
 @Injectable()
 export class PersonService {
-  constructor(private http: Http) {}
+  constructor(
+    private http: Http,
+    private personApi: PersonApi
+  ){}
 
   getPeople(){
-  return this.http
-  .get(API_URL + 'People')
-  .toPromise()
-}
+    return this.personApi.find<Person>()
+    .toPromise()
+  }
 
-getPerson(personId){
-  return this.http
-  .get(API_URL + 'People/' + personId)
-  .toPromise()
-}
+  getPerson(personId){
+    return this.personApi.findById<Person>(personId)
+    .toPromise()
+  }
 
-deletePerson(personId){
-  return this.http
-  .delete(API_URL + 'People/' + personId)
-  .toPromise()
-}
+  deletePerson(personId){
+    return this.personApi.deleteById<Person>(personId)
+    .toPromise()
+  }
 
-getEnablePeople(){
-  return this.http
-  .get(API_URL + 'People?filter={"where":{"enabled":true}}')
-  .toPromise()
-}
+  getEnablePeople(){
+    let query = {enabled: true};
+    return this.personApi.find<Person>({where: query})
+    .toPromise()
+  }
 
-updatePerson(personId, values){
-  return this.http
-  .put(API_URL + 'People/' + personId, {
-    name: values.name,
-    surname: values.lastname,
-    age: values.age ,
-    enabled: values.able
-  })
-  .toPromise()
-}
+  updatePerson(personId, values){
+    let data = new Person();
+    data.name = values.name;
+    data.surname = values.lastname;
+    data.age = values.age;
+    data.enabled = values.able;
+    return this.personApi.updateAttributes<Person>(personId, data)
+    .toPromise()
+  }
 
-createPerson(values){
-  return this.http
-  .post(API_URL + 'People', {
-    name: values.name,
-    surname: values.lastname,
-    age: values.age ,
-    enabled: values.able
-  })
-  .toPromise()
-}
+  createPerson(values){
+    let data = new Person();
+    data.name = values.name;
+    data.surname = values.lastname;
+    data.age = values.age;
+    data.enabled = values.able;
+    return this.personApi.create<Person>(data)
+    .toPromise()
+  }
 }

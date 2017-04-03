@@ -22,7 +22,7 @@ export class MyPetsModal implements OnInit{
 
   ngOnInit(): void {
     this.petService.getPetsByOwner(this.personId)
-    .then(res => {this.pets = res.json()});
+    .then(res => {this.pets = res});
   }
 
   setFree(petId){

@@ -32,13 +32,13 @@ export class PersonComponent implements OnInit{
 
   getPeople(){
     this.busy = this.personService.getPeople()
-    .then(res => this.people = res.json())
+    .then(res => this.people = res)
   }
 
   updatePets(personId){
     this.petService.getPetsByOwner(personId)
     .then(res => {
-      let pets = res.json();
+      let pets = res;
       for (let pet of pets){
         this.petService.setOwnerNull(pet.id)
         .then(result => this.getPeople())
