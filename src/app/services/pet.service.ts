@@ -2,7 +2,6 @@ import { Injectable } from '@angular/core';
 import { Http } from '@angular/http';
 import { PetApi, Pet } from '../../../sdk';
 import 'rxjs/add/operator/toPromise';
-const API_URL = "https://ionic2-loopback-mongo-api.herokuapp.com/api/";
 
 @Injectable()
 export class PetService {
