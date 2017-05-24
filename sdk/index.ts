@@ -44,8 +44,9 @@ import { CommonModule } from '@angular/common';
 import { NgModule, ModuleWithProviders } from '@angular/core';
 import { CookieBrowser } from './storage/cookie.browser';
 import { StorageBrowser } from './storage/storage.browser';
-import { PersonApi } from './services/custom/Person';
-import { PetApi } from './services/custom/Pet';
+import { UserApi } from './services/custom/User';
+import { QuestionApi } from './services/custom/Question';
+import { AnswerApi } from './services/custom/Answer';
 /**
 * @module SDKBrowserModule
 * @description
@@ -75,8 +76,9 @@ export class SDKBrowserModule {
         LoggerService,
         JSONSearchParams,
         SDKModels,
-        PersonApi,
-        PetApi,
+        UserApi,
+        QuestionApi,
+        AnswerApi,
         internalStorageProvider,
         { provide: SDKStorage, useClass: StorageBrowser }
       ]

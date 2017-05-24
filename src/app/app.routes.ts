@@ -1,10 +1,10 @@
 import { Routes } from '@angular/router';
 
-import { PersonComponent } from './person/person.component';
-import { PetComponent } from './pet/pet.component';
+import { QuestionComponent } from './question/question.component';
+import { AnswerComponent } from './answer/answer.component';
 
 export const rootRouterConfig: Routes = [
-  { path: '', redirectTo: 'person', pathMatch: 'full' },
-  { path: 'person', component: PersonComponent },
-  { path: 'pet', component: PetComponent },
+  { path: '', redirectTo: 'question', pathMatch: 'full' },
+  { path: 'question', component: QuestionComponent },
+  { path: 'answer', component: AnswerComponent },
 ];

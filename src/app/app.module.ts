@@ -5,16 +5,10 @@ import { AppComponent } from './app.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
 import { HttpModule } from '@angular/http';
-import { PersonComponent } from './person/person.component';
-import { PetComponent } from './pet/pet.component';
-import { PersonService } from './services/person.service';
-import { PetService } from './services/pet.service';
-import { PersonUpdateModal  } from './person/personUpdate.modal';
-import { PersonCreateModal  } from './person/personCreate.modal';
-import { PetCreateModal  } from './pet/petCreate.modal';
-import { PetUpdateModal  } from './pet/petUpdate.modal';
-import { MyPetsModal  } from './person/myPets.modal';
-import { AdoptModal  } from './person/adopt.modal';
+import { QuestionComponent } from './question/question.component';
+import { AnswerComponent } from './answer/answer.component';
+import { QuestionService } from './services/question.service';
+import { AnswerService } from './services/answer.service';
 import { LocationStrategy, HashLocationStrategy } from '@angular/common';
 import {BusyModule} from 'angular2-busy';
 import { ModalModule } from 'ng2-bootstrap/modal';
@@ -24,14 +18,8 @@ import { SDKBrowserModule } from '../../sdk/index';
 @NgModule({
   declarations: [
     AppComponent,
-    PersonComponent,
-    PetComponent,
-    PersonUpdateModal,
-    PersonCreateModal,
-    PetCreateModal,
-    PetUpdateModal,
-    MyPetsModal,
-    AdoptModal
+    AnswerComponent,
+    QuestionComponent
   ],
   imports: [
     BrowserModule,
@@ -45,8 +33,8 @@ import { SDKBrowserModule } from '../../sdk/index';
     SDKBrowserModule.forRoot()
   ],
   providers: [
-    PersonService,
-    PetService
+    QuestionService,
+    AnswerService
   ],
   bootstrap: [ AppComponent ]
 })

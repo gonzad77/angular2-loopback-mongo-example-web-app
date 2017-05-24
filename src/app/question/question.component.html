@@ -1,0 +1,17 @@
+<div class="page-header">
+  <h1>Learn Angular 4 </h1>
+</div>
+
+<div class="conteiner">
+  <div *ngFor="let category of categories" (click)="openDetails(category)" class="panel panel-primary">
+    <div class="panel-heading">
+      <h3>{{category.title}}</h3>
+    </div>
+    <div class="panel-body">
+      {{category.description}}
+    </div>
+    <div class="panel-footer">
+      ionic2
+    </div>
+  </div>
+</div>

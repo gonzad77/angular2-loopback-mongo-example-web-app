@@ -1,5 +1,6 @@
 /* tslint:disable */
-export * from './Person';
-export * from './Pet';
+export * from './User';
+export * from './Question';
+export * from './Answer';
 export * from './BaseModels';
 
