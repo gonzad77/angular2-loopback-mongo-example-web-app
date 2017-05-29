@@ -3,7 +3,7 @@
 </div>
 
 <div class="conteiner">
-  <div *ngFor="let category of categories" (click)="openDetails(category)" class="panel panel-primary">
+  <div *ngFor="let category of categories" (click)="openDetails(category.slug)" class="panel panel-primary">
     <div class="panel-heading">
       <h3>{{category.title}}</h3>
     </div>
@@ -11,7 +11,9 @@
       {{category.description}}
     </div>
     <div class="panel-footer">
-      ionic2
+      <span *ngFor="let tag of category.tags" class="badge">
+        {{tag.name}}
+      </span>
     </div>
   </div>
 </div>

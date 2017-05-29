@@ -6,10 +6,10 @@ import 'rxjs/add/operator/map';
 @Component({
   selector: 'question',
   styleUrls: ['./question.scss'],
-  templateUrl: './question.component.html'
+  templateUrl: './question.category.component.html'
 })
 
-export class QuestionComponent implements OnInit{
+export class QuestionCategoryComponent implements OnInit{
 
   categories : Array<any>;
 
@@ -26,6 +26,6 @@ export class QuestionComponent implements OnInit{
   }
 
   openDetails(params){
-    this.router.navigate(['/answer',{question: params} ]);
+    this.router.navigate(['/questions',{questionSlug: params} ]);
   }
 }

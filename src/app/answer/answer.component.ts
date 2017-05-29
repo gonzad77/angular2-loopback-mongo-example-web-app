@@ -1,7 +1,6 @@
-import {Component, OnInit, ViewContainerRef} from '@angular/core';
-import { Router } from '@angular/router';
+import {Component, OnInit} from '@angular/core';
+import { Router, ActivatedRoute } from '@angular/router';
 import {AnswerService} from '../services/answer.service'
-import { ToastsManager, Toast } from 'ng2-toastr/ng2-toastr';
 
 @Component({
   selector: 'answer',
@@ -11,16 +10,18 @@ import { ToastsManager, Toast } from 'ng2-toastr/ng2-toastr';
 
 export class AnswerComponent {
 
+  question: any;
+
   constructor(
     private answerService: AnswerService,
     private router: Router,
-    public toaster: ToastsManager,
-    private viewContainerRef:ViewContainerRef
+    private route: ActivatedRoute,
   ){
-    this.toaster.setRootViewContainerRef(viewContainerRef);
   }
 
   ngOnInit(): void {
+    this.question = this.route.params['questionSlug'];
+    console.log()
 
   }
 

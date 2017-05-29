@@ -1,0 +1,24 @@
+<div class="jumbotron">
+  <h1>Learn about SOMETHING </h1>
+  <p>Ask about SOMETHING</p>
+  <p><a class="btn btn-primary btn-lg" (click)="ask()" role="button">ASK</a></p>
+</div>
+<div class="conteiner">
+  <div *ngFor="let question of questions" (click)="openDetails(question.id)" class="panel panel-primary">
+    <div class="panel-body">
+      {{question.question}}
+    </div>
+    <div class="panel-footer">
+      <span class="glyphicon glyphicon-thumbs-up badge">
+        {{question.positiveVotes}}
+      </span>
+      <span class="glyphicon glyphicon-thumbs-down badge">
+        {{question.negativeVotes}}
+      </span>
+      <span class="badge">
+        {{question.answers.length}}
+        Answers
+      </span>
+    </div>
+  </div>
+</div>

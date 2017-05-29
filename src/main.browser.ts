@@ -22,4 +22,4 @@ switch (document.readyState) {
     document.addEventListener('DOMContentLoaded', () => main());
 }
 
-LoopBackConfig.setBaseURL('https://ionic2-loopback-mongo-api.herokuapp.com');
+LoopBackConfig.setBaseURL('https://q-a-example-loopback-api.herokuapp.com');

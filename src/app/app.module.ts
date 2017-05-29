@@ -5,7 +5,9 @@ import { AppComponent } from './app.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
 import { HttpModule } from '@angular/http';
-import { QuestionComponent } from './question/question.component';
+import { QuestionCategoryComponent } from './question/question.category.component';
+import { QuestionFeedComponent } from './question/question.feed.component';
+import { AskQuestionComponent } from './question/ask.question.component';
 import { AnswerComponent } from './answer/answer.component';
 import { QuestionService } from './services/question.service';
 import { AnswerService } from './services/answer.service';
@@ -18,8 +20,10 @@ import { SDKBrowserModule } from '../../sdk/index';
 @NgModule({
   declarations: [
     AppComponent,
-    AnswerComponent,
-    QuestionComponent
+    QuestionFeedComponent,
+    QuestionCategoryComponent,
+    AskQuestionComponent,
+    AnswerComponent
   ],
   imports: [
     BrowserModule,
