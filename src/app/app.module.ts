@@ -17,6 +17,7 @@ import { ModalModule } from 'ng2-bootstrap/modal';
 import {ToastModule} from 'ng2-toastr/ng2-toastr';
 import { SDKBrowserModule } from '../../sdk/index';
 
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -34,7 +35,8 @@ import { SDKBrowserModule } from '../../sdk/index';
     BusyModule,
     ModalModule.forRoot(),
     ToastModule.forRoot(),
-    SDKBrowserModule.forRoot()
+    SDKBrowserModule.forRoot(),
+    ModalModule.forRoot()
   ],
   providers: [
     QuestionService,

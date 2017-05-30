@@ -2,6 +2,7 @@
   <h1>Learn about SOMETHING </h1>
   <p>Ask about SOMETHING</p>
   <p><a class="btn btn-primary btn-lg" (click)="ask()" role="button">ASK</a></p>
+  <create-modal #modalCreate="childCreate"></create-modal>
 </div>
 <div class="conteiner">
   <div *ngFor="let question of questions" (click)="openDetails(question.id)" class="panel panel-primary">
