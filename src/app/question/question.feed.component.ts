@@ -1,6 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import { Router, ActivatedRoute, Params } from '@angular/router';
-import { QuestionService } from '../services/question.service'
+import { QuestionService } from '../services/question.service';
+import { AnswerService } from '../services/answer.service';
 import 'rxjs/add/operator/map';
 
 @Component({
@@ -12,29 +13,64 @@ import 'rxjs/add/operator/map';
 export class QuestionFeedComponent implements OnInit{
 
   questions: Array<any>;
-  questionSlug: string;
+  categoryTitle: string;
+  categorySlug: any;
 
   constructor(
     private router: Router,
     private route: ActivatedRoute,
-    public questionService: QuestionService
+    public questionService: QuestionService,
+    public answerService: AnswerService
   ){
   }
 
   ngOnInit(): void {
-    this.questionSlug = this.route.snapshot.params['questionSlug'];
-    this.questionService.getQuestionsBySlug(this.questionSlug).
-    then( res => {
+    this.route.data.subscribe(routeData => {
+      let data = routeData['data'];
+      if (data) {
+        this.questions = data.questions;
+        this.categoryTitle = data.category_title;
+        this.categorySlug = data.category_slug;
+      }
+    })
+  }
+
+  getQuestions(){
+    this.questionService.getQuestionsBySlug(this.categorySlug)
+    .then( res => {
       this.questions = res;
-      console.log(res);
     })
   }
 
   openDetails(params){
-    this.router.navigate(['/answer',{questionId: params} ]);
+    // this.router.navigate(['/answer',{questionId: params} ]);
   }
 
-  ask(){
-    this.router.navigate(['/ask',{questionSlug: this.questionSlug}])
+  delete(questionId){
+    this.questionService.deleteQuestion(questionId)
+    .then(res => this.getQuestions());
+
+    this.answerService.getAnswers(questionId)
+    .then(answers => {
+      for(let answer of answers){
+        this.answerService.deleteAnswer(answer.id);
+      }
+    })
+  }
+
+  addPositiveVote(question){
+    let data = question;
+    data.positiveVotes += 1;
+    data.categorySlug = this.categorySlug;
+    this.questionService.updateQuestion(data)
+    .then(res => console.log(res))
+  }
+
+  addNegativeVote(question){
+    let data = question;
+    data.negativeVotes += 1;
+    data.questionSlug = this.categorySlug;
+    this.questionService.updateQuestion(data)
+    .then(res => console.log(res))
   }
 }

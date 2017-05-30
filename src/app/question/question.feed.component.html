@@ -1,7 +1,7 @@
-<div class="jumbotron">
-  <h1>Learn about SOMETHING </h1>
-  <p>Ask about SOMETHING</p>
-  <p><a class="btn btn-primary btn-lg" (click)="ask()" role="button">ASK</a></p>
+<div class="jumbotron text-center">
+  <h1>Learn about {{categoryTitle}} </h1>
+  <p>Ask about {{categoryTitle}}</p>
+  <a class="btn btn-primary btn-lg" (click)="modalCreate.show()" role="button">ASK</a>
   <create-modal #modalCreate="childCreate"></create-modal>
 </div>
 <div class="conteiner">
@@ -10,16 +10,19 @@
       {{question.question}}
     </div>
     <div class="panel-footer">
-      <span class="glyphicon glyphicon-thumbs-up badge">
+      <span class="glyphicon glyphicon-thumbs-up badge" (click)="addPositiveVote(question)">
         {{question.positiveVotes}}
       </span>
-      <span class="glyphicon glyphicon-thumbs-down badge">
+      <span class="glyphicon glyphicon-thumbs-down badge" (click)="addNegativeVote(question)">
         {{question.negativeVotes}}
       </span>
       <span class="badge">
         {{question.answers.length}}
         Answers
       </span>
+      <button type="button" class="btn btn-default" (click)="delete(question.id)">
+        <span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
+      </button>
     </div>
   </div>
 </div>

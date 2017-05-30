@@ -11,6 +11,20 @@
         <div class="conteiner">
           <form [formGroup]="askForm" class="form" (ngSubmit)="onSubmit(askForm.value)" >
 
+            <div class="form-group">
+               <label class="form-label" >Write your question here:</label>
+               <input class="form-control form-input" type="text" formControlName="question">
+             </div>
+             <br>
+             <div class="btn-group btn-group-justified" role="group">
+               <div class="btn-group" role="group">
+                <button class="btn btn-primary" type="submit" [disabled]="!askForm.valid">Ask</button>
+               </div>
+               <div class="btn-group" role="group">
+                 <button class="btn btn-primary" type="button"(click)="createModal.hide()">Cancel</button>
+               </div>
+             </div>
+
          </form>
         </div>
       </div>

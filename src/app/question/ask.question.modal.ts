@@ -11,7 +11,7 @@ import 'rxjs/add/operator/map';
   styleUrls: ['./question.scss']
 })
 
-export class AskQuestionComponent implements OnInit{
+export class AskQuestionModal implements OnInit{
 
   @ViewChild('createModal') createModal;
   askForm: FormGroup;
@@ -25,18 +25,18 @@ export class AskQuestionComponent implements OnInit{
   }
 
   ngOnInit(): void {
+    this.askForm = new FormGroup({
+      question: new FormControl('', Validators.required)
+    })
     this.questionSlug = this.route.params['questionSlug'];
   }
 
-  cancel(){
-   this.createModal.hide();
- }
+  onSubmit(values){
+    
+  }
 
- onSubmit(values){
-  
- }
-
- show(){
+  show(){
    this.createModal.show();
- }
+  }
+
 }

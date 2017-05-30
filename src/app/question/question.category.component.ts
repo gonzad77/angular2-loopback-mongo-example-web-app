@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import { Http } from '@angular/http';
 import 'rxjs/add/operator/map';
 
@@ -15,17 +15,21 @@ export class QuestionCategoryComponent implements OnInit{
 
   constructor(
     private router: Router,
+    private route: ActivatedRoute,
     public http: Http,
   ){
   }
 
   ngOnInit(): void {
-    this.http.get("./assets/categories.json")
-      .map((res:any) => res.json())
-      .subscribe(data => this.categories = data.categories);
+    this.route.data.subscribe(routeData => {
+      let data = routeData['data'];
+      if (data) {
+        this.categories = data.categories;
+      }
+    })
   }
 
   openDetails(params){
-    this.router.navigate(['/questions',{questionSlug: params} ]);
+    this.router.navigate(['/questions',{categorySlug: params} ]);
   }
 }
