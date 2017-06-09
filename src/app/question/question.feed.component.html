@@ -1,7 +1,7 @@
 <div class="jumbotron text-center">
   <h1>Learn about {{categoryTitle}} </h1>
   <p>Ask about {{categoryTitle}}</p>
-  <a class="btn btn-primary btn-lg" (click)="modalCreate.show()" role="button">ASK</a>
+  <a class="btn btn-primary btn-lg" (click)="modalCreate.show(categorySlug)" role="button">ASK</a>
   <create-modal #modalCreate="childCreate"></create-modal>
 </div>
 <div class="conteiner">

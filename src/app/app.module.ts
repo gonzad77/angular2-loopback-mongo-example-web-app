@@ -8,9 +8,12 @@ import { HttpModule } from '@angular/http';
 import { QuestionCategoryComponent } from './question/question.category.component';
 import { QuestionFeedComponent } from './question/question.feed.component';
 import { AskQuestionModal } from './question/ask.question.modal';
+import { AnswerModal } from './answer/answer.modal';
+import { UpdateAnswerModal } from './answer/update.answer.modal';
 import { AnswerComponent } from './answer/answer.component';
 import { QuestionResolver } from './question/question.resolver';
 import { CategoryResolver } from './question/category.resolver';
+import { AnswerResolver } from './answer/answer.resolver';
 import { QuestionService } from './services/question.service';
 import { AnswerService } from './services/answer.service';
 import { LocationStrategy, HashLocationStrategy } from '@angular/common';
@@ -26,6 +29,8 @@ import { SDKBrowserModule } from '../../sdk/index';
     QuestionFeedComponent,
     QuestionCategoryComponent,
     AskQuestionModal,
+    AnswerModal,
+    UpdateAnswerModal,
     AnswerComponent
   ],
   imports: [
@@ -44,7 +49,8 @@ import { SDKBrowserModule } from '../../sdk/index';
     QuestionService,
     AnswerService,
     QuestionResolver,
-    CategoryResolver
+    CategoryResolver,
+    AnswerResolver
   ],
   bootstrap: [ AppComponent ]
 })

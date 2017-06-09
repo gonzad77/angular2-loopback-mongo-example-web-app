@@ -28,15 +28,25 @@ export class AskQuestionModal implements OnInit{
     this.askForm = new FormGroup({
       question: new FormControl('', Validators.required)
     })
-    this.questionSlug = this.route.params['questionSlug'];
   }
 
   onSubmit(values){
-    
+    console.log(values);
+    console.log(this.questionSlug);
+    let data : any = {};
+    data.question = values.question;
+    data.categorySlug = this.questionSlug;
+    this.questionService.createQuestion(data)
+    .then( res => {
+      this.createModal.hide();
+      console.log(res);
+    })
+
   }
 
-  show(){
+  show(categorySlug){
    this.createModal.show();
+   this.questionSlug = categorySlug;
   }
 
 }

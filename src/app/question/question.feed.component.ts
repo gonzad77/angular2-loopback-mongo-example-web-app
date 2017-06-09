@@ -43,7 +43,7 @@ export class QuestionFeedComponent implements OnInit{
   }
 
   openDetails(params){
-    // this.router.navigate(['/answer',{questionId: params} ]);
+    this.router.navigate(['/answer',{questionId: params} ]);
   }
 
   delete(questionId){

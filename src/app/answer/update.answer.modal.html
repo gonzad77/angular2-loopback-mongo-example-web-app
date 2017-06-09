@@ -1,0 +1,33 @@
+<div bsModal #updateModal="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" (click)="updateModal.hide()" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+        <h4 class="modal-title">Edit the answer:</h4>
+      </div>
+      <div class="modal-body">
+        <div class="conteiner">
+          <form [formGroup]="answerForm" class="form" (ngSubmit)="onSubmit(answerForm.value)" >
+
+            <div class="form-group">
+               <label class="form-label" >Write your answer here:</label>
+               <input class="form-control form-input" type="text" formControlName="answer">
+             </div>
+             <br>
+             <div class="btn-group btn-group-justified" role="group">
+               <div class="btn-group" role="group">
+                <button class="btn btn-primary" type="submit" [disabled]="!answerForm.valid">Edit</button>
+               </div>
+               <div class="btn-group" role="group">
+                 <button class="btn btn-primary" type="button" (click)="updateModal.hide()" >Cancel</button>
+               </div>
+             </div>
+
+         </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

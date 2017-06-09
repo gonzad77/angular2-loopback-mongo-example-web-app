@@ -1,1 +1,28 @@
-<div>hola</div>
+<div class="jumbotron text-center">
+  <h1>Know the answer of:</h1>
+  <p>{{question}}</p>
+  <a class="btn btn-primary btn-lg" (click)="modalCreate.show(questionId)" role="button">ANSWER</a>
+  <create-modal-answer #modalCreate="childCreate"></create-modal-answer>
+</div>
+<div class="conteiner">
+  <div *ngFor="let answer of answers" class="panel panel-primary">
+    <div class="panel-body">
+      {{answer.answer}}
+    </div>
+    <div class="panel-footer">
+      <span class="glyphicon glyphicon-thumbs-up badge" (click)="addPositiveVote(answer)">
+        {{answer.positiveVotes}}
+      </span>
+      <span class="glyphicon glyphicon-thumbs-down badge" (click)="addNegativeVote(answer)">
+        {{answer.negativeVotes}}
+      </span>
+      <button type="button" class="btn btn-default" (click)="delete(answer.id)">
+        <span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
+      </button>
+      <button type="button" class="btn btn-default" (click)="modalUpdate.show(answer)">
+        <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
+        <update-modal-answer #modalUpdate="childUpdate"></update-modal-answer>
+      </button>
+    </div>
+  </div>
+</div>
