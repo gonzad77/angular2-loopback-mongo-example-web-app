@@ -73,4 +73,9 @@ export class QuestionFeedComponent implements OnInit{
     this.questionService.updateQuestion(data)
     .then(res => console.log(res))
   }
+
+  reloadQuestions(){
+    debugger
+    this.getQuestions();
+  }
 }

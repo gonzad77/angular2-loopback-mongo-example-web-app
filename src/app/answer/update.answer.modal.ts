@@ -51,4 +51,9 @@ export class UpdateAnswerModal implements OnInit{
    })
   }
 
+  hide(){
+    debugger
+    this.updateModal.hide();
+  }
+
 }

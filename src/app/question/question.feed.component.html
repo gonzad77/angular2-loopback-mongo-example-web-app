@@ -1,10 +1,10 @@
 <div class="jumbotron text-center">
   <h1>Learn about {{categoryTitle}} </h1>
   <p>Ask about {{categoryTitle}}</p>
-  <a class="btn btn-primary btn-lg" (click)="modalCreate.show(categorySlug)" role="button">ASK</a>
-  <create-modal #modalCreate="childCreate"></create-modal>
+  <a class="btn btn-primary btn-lg" (onHide)="reloadQuestions()" (click)="modalCreate.show(categorySlug)" role="button">ASK</a>
+  <create-modal (onHide)="reloadQuestions()" #modalCreate="childCreate"></create-modal>
 </div>
-<div class="conteiner">
+<div class="conteiner col-md-offset-2 col-md-8">
   <div *ngFor="let question of questions" (click)="openDetails(question.id)" class="panel panel-primary">
     <div class="panel-body">
       {{question.question}}
